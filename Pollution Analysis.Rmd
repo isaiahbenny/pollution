@@ -1,0 +1,36 @@
+---
+title: "Pollution Analysis"
+author: "Isaiah Benny"
+date: "2025-09-02"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+# Which Year Had the Most Deaths?
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(knitr)
+```
+
+
+```{r}
+pollution <- read_csv("ny_pollution.csv.gz")
+
+death_by_year <- pollution %>% group_by(Year = year(date)) %>% 
+  summarize(Deaths = sum(death)) %>% arrange(desc(Deaths))
+
+kable(death_by_year[1,])
+```
+
+# Supporting Premise
+
+To support this conclusion, I will produce a graph showing the number of deaths for each year.
+
+```{r}
+ggplot(death_by_year) + aes(x=Year,y=Deaths) + geom_col() + 
+  ggtitle("Number of Deaths by Year") + geom_hline(yintercept = max(death_by_year$Deaths))
+```
+
