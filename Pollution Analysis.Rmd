@@ -25,6 +25,9 @@ death_by_year <- pollution %>% group_by(Year = year(date)) %>%
 kable(death_by_year[1,])
 ```
 
+## Statement
+The year with the highest number of deaths is 1999
+
 # Supporting Premise
 
 To support this conclusion, I will produce a graph showing the number of deaths for each year.
@@ -34,3 +37,6 @@ ggplot(death_by_year) + aes(x=Year,y=Deaths) + geom_col() +
   ggtitle("Number of Deaths by Year") + geom_hline(yintercept = max(death_by_year$Deaths))
 ```
 
+
+## Supporting Premise
+This bar plot shows that the years other than 1999 have lower deaths than 1999.
